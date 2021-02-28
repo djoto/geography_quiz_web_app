@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<!--
+	Domaci 3 (PIA 2020)
+	-->
+<head>
+    <title>PIA HW - Quiz</title>
+    <meta name="author" content="Ђорђе Гачић" />
+    <meta charset="utf-8" />
+    <meta name="description" content="JavaScript/jQuery homework assignment." />
+    <meta name="keywords" content="pia, web programming, html, css, bootstrap, javascript, jquery" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
+    <link rel="stylesheet" href="quiz.css">
+    <script src="quiz.js"></script>
+</head>
+<body onload="onLoad()">
+    <div class="container-fluid" id="header">
+        <h1><img src="images/question_mark.png" alt="Question Mark" id="question_mark">  Квиз - Географија  <img src="images/question_mark.png" alt="Question Mark" id="question_mark"></h1>
+    </div>
+
+    <div class="container-fluid sticky-top" id="leave_score_time">
+        <div id="leave"><button type="button" class="btn btn-danger" id="leaveButton">Одустани</button></div>
+        <div id="score">ПОЕНИ: 0</div>
+        <div id="time"></div>
+    </div>
+
+    <!-- Modal u kome će biti ispisana tabela 10 najboljih rezultata -->
+    <div class="modal fade" id="resultsModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">10 најбољих резултата</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" style="text-align: center;" id="resultsModalBody">
+                    <table id="tableResModalBody">
+                        <tr>
+                          <th>Име учесника</th>
+                          <th>Број поена</th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #bb2124;">Затвори</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" id="main">
+        <form action="#" class="was-validated">
+            <div class="form-group">
+              <label for="name"><b>Унесите Ваше име:</b></label>
+              <input type="text" class="form-control" id="name" placeholder="Унесите Ваше име" name="name" required>
+              <div class="valid-feedback" style="color: rgb(0, 68, 17);">У реду.</div>
+              <div class="invalid-feedback" style="color: rgb(117, 5, 5);">Поље је обавезно.</div>
+            </div>
+            
+        </form>
+        <button type="submit" class="btn btn-primary" id="next">Даље</button><br>
+        <img src="images/globe_smiley.png" alt="Smiley" id="globe_smiley">
+
+        <p id="welcome"></p>
+        
+        
+        <button type="button" class="btn btn-primary" id="start">Почни квиз</button><br>
+        <button type="button" class="btn btn-primary" id="resultTable" data-toggle="modal" data-target="#resultsModal">Табела најбољих резултата</button>
+
+        <div class="rules" id="quest0">
+            <p><strong>Правила квиза:</strong><br>Кликом на "Почни квиз" започињете квиз од десет питања тако што се питања
+            појављују једно за другим. Нека од питања имају понуђене одговоре, а на нека се одговара уношењем текста са 
+            тастатуре. Сваки тачан одговор носи 1 поен и нема казнених поена за нетачан одговор. На свако питање учесник 
+            има 20 секунди да одговори. Уколико учесник одговори на питање у предвиђеном року, приказуjе му се тачан одговор, 
+            односно статус да ли jе његов одговор тачан. Затим се учитава следеће питање. Уколико учесник не одговори у предвиђеном 
+            интервалу, учитава се следеће питање и подразумјева се да jе дати одговор нетачан. Учесник може да прескочи питање 
+            (неће видјети тачан одговор), али не може да се врати на њега, а може и да одустане од игре (резултат се чува). У поља 
+            за упис одговора може се писати и латиница и ћирилица тј. статус тачности не зависи од одабира неког од та два писма 
+            уколико је одговор правописно тачан.</p>
+        </div>
+
+        <div class="questions" id="quest1">
+            <strong class="nums" id="num1"></strong><br>
+            <p class="questions_text" id="question1"></p>
+            <div class="answersInput" id="answerInput1">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input1"></input>
+            </div><br> 
+            <div class="answersButtons" id="answerButton1">
+                <button type="button" class="btn" id="button_answer_q11"></button>
+                <button type="button" class="btn" id="button_answer_q12"></button>
+                <button type="button" class="btn" id="button_answer_q13"></button>
+                <button type="button" class="btn" id="button_answer_q14"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit1">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip1" onclick="onSkipButton('1')">Прескочи</button>
+                <p id="correct1" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect1" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest2">
+            <strong class="nums" id="num2"></strong><br>
+            <p class="questions_text" id="question2"></p> 
+            <div class="answersInput" id="answerInput2">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input2"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton2">
+                <button type="button" class="btn" id="button_answer_q21"></button>
+                <button type="button" class="btn" id="button_answer_q22"></button>
+                <button type="button" class="btn" id="button_answer_q23"></button>
+                <button type="button" class="btn" id="button_answer_q24"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit2">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip2" onclick="onSkipButton('2')">Прескочи</button>
+                <p id="correct2" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect2" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest3">
+            <strong class="nums" id="num3"></strong><br>
+            <p class="questions_text" id="question3"></p> 
+            <div class="answersInput" id="answerInput3">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input3"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton3">
+                <button type="button" class="btn" id="button_answer_q31"></button>
+                <button type="button" class="btn" id="button_answer_q32"></button>
+                <button type="button" class="btn" id="button_answer_q33"></button>
+                <button type="button" class="btn" id="button_answer_q34"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit3">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip3" onclick="onSkipButton('3')">Прескочи</button>
+                <p id="correct3" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect3" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest4">
+            <strong class="nums" id="num4"></strong><br>
+            <p class="questions_text" id="question4"></p> 
+            <div class="answersInput" id="answerInput4">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input4"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton4">
+                <button type="button" class="btn" id="button_answer_q41"></button>
+                <button type="button" class="btn" id="button_answer_q42"></button>
+                <button type="button" class="btn" id="button_answer_q43"></button>
+                <button type="button" class="btn" id="button_answer_q44"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit4">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip4" onclick="onSkipButton('4')">Прескочи</button>
+                <p id="correct4" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect4" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest5">
+            <strong class="nums" id="num5"></strong><br>
+            <p class="questions_text" id="question5"></p> 
+            <div class="answersInput" id="answerInput5">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input5"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton5">
+                <button type="button" class="btn" id="button_answer_q51"></button>
+                <button type="button" class="btn" id="button_answer_q52"></button>
+                <button type="button" class="btn" id="button_answer_q53"></button>
+                <button type="button" class="btn" id="button_answer_q54"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit5">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip5" onclick="onSkipButton('5')">Прескочи</button>
+                <p id="correct5" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect5" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest6">
+            <strong class="nums" id="num6"></strong><br>
+            <p class="questions_text" id="question6"></p> 
+            <div class="answersInput" id="answerInput6">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input6"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton6">
+                <button type="button" class="btn" id="button_answer_q61"></button>
+                <button type="button" class="btn" id="button_answer_q62"></button>
+                <button type="button" class="btn" id="button_answer_q63"></button>
+                <button type="button" class="btn" id="button_answer_q64"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit6">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip6" onclick="onSkipButton('6')">Прескочи</button>
+                <p id="correct6" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect6" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest7">
+            <strong class="nums" id="num7"></strong><br>
+            <p class="questions_text" id="question7"></p> 
+            <div class="answersInput" id="answerInput7">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input7"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton7">
+                <button type="button" class="btn" id="button_answer_q71"></button>
+                <button type="button" class="btn" id="button_answer_q72"></button>
+                <button type="button" class="btn" id="button_answer_q73"></button>
+                <button type="button" class="btn" id="button_answer_q74"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit7">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip7" onclick="onSkipButton('7')">Прескочи</button>
+                <p id="correct7" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect7" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest8">
+            <strong class="nums" id="num8"></strong><br>
+            <p class="questions_text" id="question8"></p> 
+            <div class="answersInput" id="answerInput8">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input8"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton8">
+                <button type="button" class="btn" id="button_answer_q81"></button>
+                <button type="button" class="btn" id="button_answer_q82"></button>
+                <button type="button" class="btn" id="button_answer_q83"></button>
+                <button type="button" class="btn" id="button_answer_q84"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit8">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip8" onclick="onSkipButton('8')">Прескочи</button>
+                <p id="correct8" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect8" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest9">
+            <strong class="nums" id="num9"></strong><br>
+            <p class="questions_text" id="question9"></p> 
+            <div class="answersInput" id="answerInput9">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input9"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton9">
+                <button type="button" class="btn" id="button_answer_q91"></button>
+                <button type="button" class="btn" id="button_answer_q92"></button>
+                <button type="button" class="btn" id="button_answer_q93"></button>
+                <button type="button" class="btn" id="button_answer_q94"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit9">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip9" onclick="onSkipButton('9')">Прескочи</button>
+                <p id="correct9" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect9" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="questions" id="quest10">
+            <strong class="nums" id="num10"></strong><br>
+            <p class="questions_text" id="question10"></p> 
+            <div class="answersInput" id="answerInput10">
+                <input type="text" style="width: 100%" placeholder="Унесите Ваш одговор" id="input10"></input>
+            </div><br>
+            <div class="answersButtons" id="answerButton10">
+                <button type="button" class="btn" id="button_answer_q101"></button>
+                <button type="button" class="btn" id="button_answer_q102"></button>
+                <button type="button" class="btn" id="button_answer_q103"></button>
+                <button type="button" class="btn" id="button_answer_q104"></button>
+            </div><br>
+            <div class="submit_skip">
+                <button type="button" class="btn btn-success" id="submit10">Потврди</button>
+                <button type="button" class="btn btn-danger" id="skip10" onclick="onSkipButton('10')">Прескочи</button>
+                <p id="correct10" style="color: green; display: none; font-size: x-large;">Тачно</p>
+                <p id="incorrect10" style="color: red; display: none; font-size: x-large;">Нетачно</p>
+            </div>
+        </div>
+
+        <div class="endConfiguration">
+            <strong class="end">Крај</strong><br>
+            <p class="score_text">Број поена:</p><br>
+            <p class="score_num" id="score_num"></p>
+            <div class="again_table">
+                <button type="button" class="btn btn-warning" id="again"><b>Играј поново</b></button>
+                <button type="button" class="btn btn-warning" id="table" data-toggle="modal" data-target="#resultsModal"><b>Табела најбољих резултата</b></button>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

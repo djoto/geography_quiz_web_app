@@ -1,0 +1,227 @@
+/* CSS file for hw-3 "Квиз - Географија" */
+body {
+    background-color: #33ff33;
+    margin: 0;
+    padding: 0;
+}
+#header {
+    border-bottom: 2px solid #000099;
+    background-color: #33ff33;
+    text-align: center;
+    padding: 15px;
+}
+#header h1 {
+    font-size: 400%;
+    color: #000099;
+    text-shadow: 2px 2px 4px #000099;
+}
+#question_mark {
+    width: 40px;
+}
+@media only screen and (max-width: 1000px){
+    #header h1 {
+        font-size: 250%;
+    }
+    #question_mark {
+        width: 20px;
+    }
+}
+#main {
+    background-color: #33ff33;
+    text-align: center;
+    padding: 15px;
+}
+#main img {
+    width: 20%
+}
+@media only screen and (max-width: 600px){
+    #main img {
+        width: 50%;
+    }
+}
+.form-control {
+    background-color: #4dffff;
+}
+.was-validated {
+    padding: 3% 10% 0% 10%;
+}
+#next{
+    margin-bottom: 15px;
+    font-size: larger;
+    padding: 10px 15px 10px 15px;
+    box-shadow: 2px 2px 4px #000099
+}
+@media only screen and (min-width: 800px){
+    .was-validated {
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+    }
+}
+#welcome {
+    display: none;
+    font-size: large;
+    color: #000099;
+}
+#start {
+    display: none;
+    font-size: larger;
+    padding: 10px 15px 10px 15px;
+    margin-left: 5px;
+    box-shadow: 2px 2px 4px #000099
+}
+#resultTable {
+    display: none;
+    font-size: larger;
+    padding: 10px 15px 10px 15px;
+    margin-top: 15px;
+    box-shadow: 2px 2px 4px #000099
+}
+.rules {
+    background-color: #4dffff;
+    border-left: 6px solid #000099;
+    margin: 3% 10% 3% 10%;
+    padding: 10px 15px 5px 15px;
+    text-align: left;
+    text-align: justify;
+    font-size: large;
+    display: none;
+    box-shadow: 2px 2px 4px black;
+}
+.rules strong{
+    font-size: x-large;
+    color: #000099;
+}
+
+.endConfiguration{
+    border-radius: 10px;
+    background-color: #4dffff;
+    margin: 0% 10% 3% 10%;
+    padding: 20px 20px 40px 30px;
+    text-align: center;
+    font-size: large;
+    display: none;
+    font-weight: bold;
+    box-shadow: 2px 2px 4px black;
+}
+.endConfiguration strong{
+    font-size: 50px;
+    color: #000099;
+}
+.endConfiguration .again_table{
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 5px;
+}
+.again_table button {
+    box-shadow: 2px 2px 4px black;
+    width: 100%;
+    margin: 5px;
+}
+.score_text {
+    font-size: xx-large;
+    margin-top: 10px;
+}
+.score_num {
+    font-size: 50px;
+    color: #000099;
+    margin-top: -30px;
+    margin-bottom: 10px;
+}
+
+.questions {
+    border-radius: 10px;
+    background-color: #4dffff;
+    top: 50%;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 20px 20px 40px 30px;
+    text-align: center;
+    font-size: large;
+    display: none;
+    font-weight: bold;
+    box-shadow: 2px 2px 4px black;
+}
+.questions strong{
+    font-size: xx-large;
+    color: #000099;
+}
+.answersButtons{
+    text-align: center;
+    width: 50%;
+    margin: -20px 25% -10px 25%
+}
+.answersInput{
+    text-align: center;
+    width: 50%;
+    margin: 20px 25% -30px 25%;
+}
+.answersButtons button {
+    box-shadow: 2px 2px 4px black;
+    background-color: #0275d8;
+    width: 100%;
+    margin: 5px;
+}
+
+@media only screen and (max-width: 750px){
+    .answersButtons {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .answersInput {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+.questions .submit_skip{
+    overflow: auto;
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    padding: 5px;
+}
+.submit_skip button {
+    box-shadow: 2px 2px 4px black;
+    width: 100px;
+    margin: 5px;
+}
+button[type=button]:disabled {
+    opacity: 0.9;
+}
+
+#leave_score_time {
+    border: 2px solid #000099;
+    display: flex;
+    flex-direction: row;
+    background-color: #4dffff;
+    color: #000099;
+    font-weight: bold;
+}
+
+#leave_score_time div{
+    width: 33.3%;
+    padding: 5px;
+    font-size: large; 
+}
+#score{
+    text-align: center;
+    margin-top: 5px;
+}
+#time {
+    text-align: right;
+    margin-top: 5px;
+}
+
+#tableResModalBody td, th {
+    border: 1px solid black;
+}
+#tableResModalBody {
+    width: 100%;
+    border-collapse: collapse;
+}
